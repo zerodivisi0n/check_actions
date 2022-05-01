@@ -1,0 +1,10 @@
+name: action1
+on: 
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Use secret ${{ secrets.MY_SECRET }} > /dev/null
+      - run: echo Run tests on branch ${{ github.head_ref || github.ref }}
