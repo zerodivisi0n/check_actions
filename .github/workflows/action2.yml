@@ -1,0 +1,16 @@
+name: action2
+on: 
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Use secret ${{ secrets.MY_SECRET }} > /dev/null
+      - name: "Check PR title"
+        run: |
+          if [[ ! "${{ github.event.pull_request.title }}" =~ ^.{2,}\:.{2,} ]]; then
+            exit 1
+          fi
